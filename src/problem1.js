@@ -20,4 +20,7 @@ function problem(){
     }
 }
 
-module.exports = problem;
+module.exports = {
+    problem : problem,
+    generate : generate
+};

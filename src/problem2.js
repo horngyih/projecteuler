@@ -1,11 +1,14 @@
 function* fibonacci(limit){
-    limit = (limit>0)?limit:-1;
+    limit = (limit)?limit:100;
+
     let lastlast = 0;
     let last = 1;
     let current = 1;
-    while( current <= limit ){
+    while( limit < 0 || current < limit ){
         yield current;
-        current = (lastlast||1)+last;
+        current = last + lastlast;
+        lastlast = last;
+        last = current;
     }
 }
 
@@ -19,7 +22,11 @@ function problem(limit){
             sum +=i.value;
         }
         i = fibGen.next();
-    } while(!i.done)
+    } while(!i.done);
+    return sum;
 }
 
-module.exports = problem;
+module.exports = {
+    problem : problem,
+    fibonacci : fibonacci
+};
